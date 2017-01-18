@@ -11,6 +11,8 @@ AWESOMENESS = [
     'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
     'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
+madlib_list = ["madlib.html", "madlib2.html", "madlib3.html", "madlib4.html"]
+
 
 @app.route('/')
 def start_here():
@@ -58,9 +60,12 @@ def show_madlib():
     color = request.args.get("color")
     noun = request.args.get("noun")
     adj = request.args.get("adjective")
+    flavor = request.args.getlist("flavor")
+    print flavor
+    print type(flavor)
 
-    return render_template("madlib.html", person=player, color=color, noun=noun,
-                            adjective=adj)
+    return render_template(choice(madlib_list), person=player, color=color, noun=noun,
+                            adjective=adj, flavor=flavor)
 
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads" our web app
